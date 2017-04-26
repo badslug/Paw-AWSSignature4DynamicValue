@@ -1,3 +1,24 @@
+# NOTE: Broken Official Paw Extension
+
+As the offical version is currently broken in version `1.0.5` we forked this repository and made adjustments to get it running again.
+Using this fork in Paw locally is currently not easily archiveable. So if you by accident updated you Paw Extension you can apply this patch to get it working again.
+
+To adjust the extension locally you need to update the following file:
+
+```shell
+$(HOME)/Library/Containers/com.luckymarmot.Paw/Data/Library/Application Support/com.luckymarmot.Paw/Extensions/com.shigeoka.PawExtensions.AWSSignature4DynamicValue/AWSSignature4DynamicValue.js
+```
+
+The necessary changes are part of this PR against the upstream: https://github.com/badslug/Paw-AWSSignature4DynamicValue/pull/11
+
+To update the file or to install the extension if not done yet you can run this taks in the console:
+
+```shell
+make install
+```
+
+---
+
 # AWS Signature 4 Auth Dynamic Value (Paw Extension)
 
 A [Paw Extension](http://luckymarmot.com/paw/extensions/) to compute
