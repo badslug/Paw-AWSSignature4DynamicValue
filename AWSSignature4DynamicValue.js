@@ -237,7 +237,9 @@ var AWSSignature4DynamicValue = function() {
             day = amzDay(now)
             daytime = day + 'T' + amzTime(now)
         }
-        var bodyHash = hash256(request.body || '')
+        var bodyHash = this.use_header_hash
+            ? request.getHeaderByName('x-amz-content-sha256', false)
+            : hash256(request.body || '')
 
         // Search for other signed headers to include. We will assume any headers that begin with X-Amz-<*> will be included
         var headers = {} // The actual headers to sign
@@ -319,6 +321,7 @@ AWSSignature4DynamicValue.inputs = [
       DynamicValueInput('secret', 'AWS Secret Key', 'SecureValue'),
       DynamicValueInput('region', 'AWS Region (us-east-1)', 'String'),
       DynamicValueInput('service', 'AWS Service (execute-api)', 'String'),
+      DynamicValueInput('use_header_hash', 'Use X-Amz-Content-Sha256 header?', 'Checkbox', { defaultValue: false }),
   ]
 
 registerDynamicValueClass(AWSSignature4DynamicValue)
